@@ -1,0 +1,26 @@
+.pay{
+    height: 100%;
+    width: 100%;
+    h2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 100%;
+    }
+    button{
+        height: 50px;
+        width: 150px;
+        background-color: rgb(14, 205, 14);
+        border-color: white;
+        color: white;
+    }
+    .wallet{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100%;
+        width: 100%;
+    }
+    
+ }
