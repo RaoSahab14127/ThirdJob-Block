@@ -14,9 +14,9 @@ contract FreelanceContract {
         OrderStatus status;
     }
     
-    Order[] public orders;
     
     mapping(uint256 => bool) public orderExists;
+    mapping(uint256 => Order) public orders;
     
     event OrderPlaced(uint256 orderId, address indexed client, uint256 amount);
     event OrderApproved(uint256 orderId);
@@ -42,7 +42,7 @@ contract FreelanceContract {
             status: OrderStatus.Created
         });
         
-        orders.push(newOrder);
+        orders[_id]=newOrder;
         orderExists[newOrder.id] = true;
         
         emit OrderPlaced(newOrder.id, msg.sender, msg.value);
