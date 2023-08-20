@@ -6,179 +6,198 @@ import newRequest from "../../utils/newRequest";
 import {ethers} from "ethers";
 import UserContext from "../../../src/context/userContext";
 const cABI = [
-{
-  "inputs": [
-    {
-      "internalType": "uint256",
-      "name": "_orderId",
-      "type": "uint256"
-    }
-  ],
-  "name": "approveOrder",
-  "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
-},
-{
-  "inputs": [
-    {
-      "internalType": "uint256",
-      "name": "_orderId",
-      "type": "uint256"
-    }
-  ],
-  "name": "completeOrder",
-  "outputs": [],
-  "stateMutability": "nonpayable",
-  "type": "function"
-},
-{
-  "inputs": [],
-  "stateMutability": "nonpayable",
-  "type": "constructor"
-},
-{
-  "anonymous": false,
-  "inputs": [
-    {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "orderId",
-      "type": "uint256"
-    }
-  ],
-  "name": "OrderApproved",
-  "type": "event"
-},
-{
-  "anonymous": false,
-  "inputs": [
-    {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "orderId",
-      "type": "uint256"
-    }
-  ],
-  "name": "OrderCompleted",
-  "type": "event"
-},
-{
-  "anonymous": false,
-  "inputs": [
-    {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "orderId",
-      "type": "uint256"
-    },
-    {
-      "indexed": true,
-      "internalType": "address",
-      "name": "client",
-      "type": "address"
-    },
-    {
-      "indexed": false,
-      "internalType": "uint256",
-      "name": "amount",
-      "type": "uint256"
-    }
-  ],
-  "name": "OrderPlaced",
-  "type": "event"
-},
-{
-  "inputs": [
-    {
-      "internalType": "address",
-      "name": "_freelancer",
-      "type": "address"
-    },
-    {
-      "internalType": "uint256",
-      "name": "_id",
-      "type": "uint256"
-    }
-  ],
-  "name": "placeOrder",
-  "outputs": [],
-  "stateMutability": "payable",
-  "type": "function"
-},
-{
-  "inputs": [
-    {
-      "internalType": "uint256",
-      "name": "",
-      "type": "uint256"
-    }
-  ],
-  "name": "orderExists",
-  "outputs": [
-    {
-      "internalType": "bool",
-      "name": "",
-      "type": "bool"
-    }
-  ],
-  "stateMutability": "view",
-  "type": "function"
-},
-{
-  "inputs": [
-    {
-      "internalType": "uint256",
-      "name": "",
-      "type": "uint256"
-    }
-  ],
-  "name": "orders",
-  "outputs": [
-    {
-      "internalType": "uint256",
-      "name": "id",
-      "type": "uint256"
-    },
-    {
-      "internalType": "address",
-      "name": "client",
-      "type": "address"
-    },
-    {
-      "internalType": "address",
-      "name": "freelancer",
-      "type": "address"
-    },
-    {
-      "internalType": "uint256",
-      "name": "amount",
-      "type": "uint256"
-    },
-    {
-      "internalType": "enum FreelanceContract.OrderStatus",
-      "name": "status",
-      "type": "uint8"
-    }
-  ],
-  "stateMutability": "view",
-  "type": "function"
-},
-{
-  "inputs": [],
-  "name": "owner",
-  "outputs": [
-    {
-      "internalType": "address",
-      "name": "",
-      "type": "address"
-    }
-  ],
-  "stateMutability": "view",
-  "type": "function"
-}
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_orderId",
+				"type": "uint256"
+			}
+		],
+		"name": "approveOrder",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_orderId",
+				"type": "uint256"
+			}
+		],
+		"name": "completeOrder",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "orderId",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderApproved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "orderId",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderCompleted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "orderId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "client",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "OrderPlaced",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_freelancer",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "placeOrder",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "orderExists",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "orders",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "client",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "freelancer",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum FreelanceContract.OrderStatus",
+				"name": "status",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "orderss",
+		"outputs": [
+			{
+				"internalType": "enum FreelanceContract.OrderStatus",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]
-const Cadd = "0x977Cc9570a70aBecA5Db9D99726C7f98FCcbDb86";
+const Cadd = "0x10429c80d985c00881CfB734a56c925eb74fbeDB";
 const Orders = () => {
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -209,6 +228,33 @@ const Orders = () => {
       }
     }
   };
+  const donefunc =  async () => {
+    try{
+      const contract = new ethers.Contract(Cadd, cABI, sign);
+    const _orderId = 1; // Order ID  
+    const placeOrderTx = await contract.approveOrder( _orderId);
+    await placeOrderTx.wait();
+    console.log('Order: Done');
+          
+          } catch (err) {
+            console.log(err);
+          } 
+           };
+   const approvefunc =  async () => {
+    try{
+      const contract = new ethers.Contract(Cadd, cABI, sign);
+    const _orderId = 1; // Order ID 
+    const iscomplete = await contract.orderss(_orderId);
+    console.log(iscomplete)
+    if(iscomplete === 1){
+    const placeOrderTx = await contract.completeOrder( _orderId);
+    await placeOrderTx.wait();
+    console.log('Order: Completed payment transfered');
+    } 
+          } catch (err) {
+            console.log(err);
+          } 
+                   };
   return (
     <div className="orders">
       {isLoading ? (
@@ -221,7 +267,6 @@ const Orders = () => {
             <h1>Orders</h1>
           </div>
           <table>
-            {alert(currentUser.seller)}
             <tr>
               <th>Image</th>
               <th>Title</th>
@@ -244,7 +289,7 @@ const Orders = () => {
                     onClick={() => handleContact(order)}
                   />
                 </td>
-                 {(currentUser.isSeller)?(<td><button onClick={""}>Done</button></td>):(<td><button onClick={""}>Approved</button></td>)}
+                 {(currentUser.isSeller)?(<td><button onClick={donefunc}>Done</button></td>):(<td><button onClick={approvefunc}>Approved</button></td>)}
               </tr>
             ))}
           </table>

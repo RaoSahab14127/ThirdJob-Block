@@ -169,6 +169,25 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "orderss",
+		"outputs": [
+			{
+				"internalType": "enum FreelanceContract.OrderStatus",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "owner",
 		"outputs": [
@@ -182,7 +201,7 @@
 		"type": "function"
 	}
 ]
-  const Cadd = "0x977Cc9570a70aBecA5Db9D99726C7f98FCcbDb86";
+  const Cadd = "0x10429c80d985c00881CfB734a56c925eb74fbeDB";
 
     const stripePromise = loadStripe(
       "pk_test_51NeiR1JfYpbhw17HLoO0olVtTUHQoxIrKiVl0EAgJYC6NWHlXVFfdY55OjdUNn8yTlIOJIri1s8ogliPbw3prxNq00yXDoz1wk"
@@ -228,13 +247,20 @@
 		const contract = new ethers.Contract(Cadd, cABI, sign);
   const _freelancer = '0x6036Bf5E03Cd168e825D39D3bb6656279231708a'; // Freelancer's Ethereum address
   const _orderId = 1; // Order ID
-  const amountin = data.price*0.0003
+  const amountin = data.price*0.00003
   const amount = ethers.utils.parseEther(amountin.toString()); // Amount in Ether
 
   const placeOrderTx = await contract.placeOrder(_freelancer, _orderId, { value: amount });
   await placeOrderTx.wait();
   console.log('Order placed:', placeOrderTx.hash);
-          navigate("/orders");
+  if(placeOrderTx.hash){
+	
+		const res = await newRequest.post(
+		`/orders/payment-via-wallet/${id}`
+	  );
+	
+  }
+navigate("/orders");
         } catch (err) {
           console.log(err);
         } 

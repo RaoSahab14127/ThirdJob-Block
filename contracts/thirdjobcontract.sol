@@ -14,9 +14,9 @@ contract FreelanceContract {
         OrderStatus status;
     }
     
+    mapping(uint256 => Order) public orders;
     
     mapping(uint256 => bool) public orderExists;
-    mapping(uint256 => Order) public orders;
     
     event OrderPlaced(uint256 orderId, address indexed client, uint256 amount);
     event OrderApproved(uint256 orderId);
@@ -42,12 +42,14 @@ contract FreelanceContract {
             status: OrderStatus.Created
         });
         
-        orders[_id]=newOrder;
+        orders[_id] = newOrder;
         orderExists[newOrder.id] = true;
         
         emit OrderPlaced(newOrder.id, msg.sender, msg.value);
     }
-    
+    function orderss(uint256 _id) public view  returns( OrderStatus) {
+        return (orders[_id].status);
+    }
     function approveOrder(uint256 _orderId) external {
         require(orderExists[_orderId], "Order does not exist");
         require(msg.sender == orders[_orderId].client || msg.sender == orders[_orderId].freelancer, "Only client or freelancer can approve");
