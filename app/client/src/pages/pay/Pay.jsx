@@ -1,4 +1,3 @@
-
     import React, { useEffect, useState, useContext } from "react";
     import "./Pay.scss";
     import { loadStripe } from "@stripe/stripe-js";
@@ -225,29 +224,21 @@
           }),
       });
       const payviawallet =  async () => {
-        
-        alert(data.price + data._id)
-        try {
-          const res = await newRequest.post(
-            `/orders/payment-via-wallet/${id}`
-          );
-          console.log(sign)
-          const dep = new ethers.Contract(Cadd, cABI, sign);
-          let contratdep = await dep;
-          const domain_apply1 = await contratdep.placeOrder(("0x6036Bf5E03Cd168e825D39D3bb6656279231708a", data._id), {
-            value: ethers.utils.parseEther(("0.00003")),
-          });
-          alert("Payment Succesfully paid")
-          navigate("/");
+  try{
+		const contract = new ethers.Contract(Cadd, cABI, sign);
+  const _freelancer = '0x6036Bf5E03Cd168e825D39D3bb6656279231708a'; // Freelancer's Ethereum address
+  const _orderId = 1; // Order ID
+  const amountin = data.price*0.0003
+  const amount = ethers.utils.parseEther(amountin.toString()); // Amount in Ether
+
+  const placeOrderTx = await contract.placeOrder(_freelancer, _orderId, { value: amount });
+  await placeOrderTx.wait();
+  console.log('Order placed:', placeOrderTx.hash);
           navigate("/orders");
         } catch (err) {
           console.log(err);
-        }
-
-        
+        } 
          };
-       
-        
       return <div className="pay">
         {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
@@ -260,6 +251,4 @@
           </div>
       </div>;
     };
-    
     export default Pay;
-    

@@ -27,7 +27,7 @@ const Orders = () => {
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
-          to: currentUser.seller ? buyerId : sellerId,
+          to: currentUser.isSeller ? buyerId : sellerId,
         });
         navigate(`/message/${res.data.id}`);
       }
@@ -45,11 +45,13 @@ const Orders = () => {
             <h1>Orders</h1>
           </div>
           <table>
+            {alert(currentUser.seller)}
             <tr>
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
               <th>Contact</th>
+              {(currentUser.isSeller)?(<th>Done</th>):(<th>Approved</th>)}
             </tr>
             {data.map((order) => (
               <tr key={order._id}>
@@ -66,6 +68,7 @@ const Orders = () => {
                     onClick={() => handleContact(order)}
                   />
                 </td>
+                 {(currentUser.isSeller)?(<td><button onClick={""}>Done</button></td>):(<td><button onClick={""}>Approved</button></td>)}
               </tr>
             ))}
           </table>
